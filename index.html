@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    
+    <head>
+        <title>The Urban Game</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <script type="text/javascript" src="js/angular.js" ></script>
+        <script type="text/javascript" src="js/script.js" ></script>
+		<!--<script type ="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script> -->
+    </head>
+    
+    <body>
+		<ul class="menu" ng-controller="SelectCtrl">
+			<li class="menuButton" ng-click="select('road')">Road</li>
+			<li class="menuButton" ng-click="select('bridge')">Bridge</li>
+			<li class="menuButton" ng-click="select('canal')">Canal</li>
+			<li class="menuButton" ng-click="select('cottage')">Cottage</li>
+			<li class="menuButton" ng-click="select('church')">Church</li>
+			<li class="menuButton" ng-click="select('graveyard')">Graveyard</li>
+			<li class="menuButton" ng-click="select('factory')">Factory</li>
+			<li class="menuButton" ng-click="select('erase')">Erase</li>
+		</ul>
+		
+		<ul class="menu" ng-controller="MenuCtrl">
+			<li class="menuButton" ng-click="clear()">Clear</li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<grid></grid>
+    </body>
+    
+</html>

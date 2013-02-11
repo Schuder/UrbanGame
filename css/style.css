@@ -1,0 +1,123 @@
+body {
+
+
+
+}
+
+.square {
+    width: 100px;
+    height:100px;
+    border: 1px solid #5D5E1C;
+    display: inline-block;
+	
+}
+
+.terrain-swamp{
+
+	background: url('../terrain/grass4.png');
+	
+}
+
+.terrain-forest {
+	background: url('../terrain/forest.png');
+}
+
+.terrain-marsh {
+	background: url('../terrain/grass6.png');
+}
+
+.terrain-plains {
+	background: url('../terrain/grass7.png');
+}
+
+.terrain-river {
+	background: url('../terrain/water.png');
+	border: 1px solid #4A625F;
+}
+
+
+.square-clicked {
+	background: white;
+}
+
+.cell-road {
+	border: 1px solid #564A3A;
+	background: url('../terrain/road.jpg');
+}
+
+.cell-bridge {
+	border: 1px solid #564A3A;
+	background: url('../terrain/bridge.png');
+}
+
+.cell-bridgeCanal {
+	border: 1px solid #564A3A;
+	background: url('../terrain/bridgeCanal.png');
+}
+
+.cell-canal {
+	border: 1px solid #564A3A;
+	background: url('../terrain/canal.png');
+}
+
+.cell-cottage {
+	background: url('../terrain/cottageGrass.png');
+}
+
+.cell-church {
+	background: url('../terrain/canal.png');
+}
+
+.cell-graveyard {
+	background: url('../terrain/bridge.png');
+}
+
+.cell-factory {
+	background: red;
+}
+
+.cell-farm {
+	background: url('../terrain/farm.png');
+}
+
+
+.cell-erase {
+	background: url('../terrain/grass7.png');
+}
+
+.cell-empty{
+}
+
+
+.row {
+
+	display: block;
+	height: 102px;
+	width: 3000px
+}
+
+.menu {
+	height: 42px;
+	padding: 0;
+	margin-bottom: 20px;
+	display: inline-block;
+	list-style-type: none;
+	
+
+}
+
+.menuButton {
+	height: 30px;
+	width: 100px;
+	border: 1px solid black;
+	background: #d1c18a;
+	text-align: center;
+	padding: 10px;
+	display: inline-block;
+	
+}
+
+.menuButton:hover {
+	
+}
+
