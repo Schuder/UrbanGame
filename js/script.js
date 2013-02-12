@@ -8,7 +8,6 @@ generateWorld();
 
 function generateWorld() {
 
-	
 	for (var i =0; i < 10; i++) {
 		biomeGen('terrain-forest',10);
 	}		
@@ -19,13 +18,12 @@ function generateWorld() {
 	
 		if (typeof world[i] == 'undefined') {
 			world[i] = 'terrain-plains';
-		
 		}
 	
 	}
 	
 }
-
+///Generates biomes, I guess
 function biomeGen(biomeName,sizeRange) {
 
 	var randomOrigin = Math.floor((Math.random()*928)+1);
@@ -58,7 +56,7 @@ function biomeGen(biomeName,sizeRange) {
 	}
 
 }
-
+///Generates a river
 function biomeGenRiver() {
 
 	var randomSpread = Math.floor((Math.random()*5)+1);
@@ -114,7 +112,7 @@ function biomeGenRiver() {
 	
 
 }
-
+///Returns whether a specified cell is on the edge of the map
 function onMapEdge(cell) {
 
 	var edges = new Array();
@@ -137,12 +135,18 @@ function onMapEdge(cell) {
 	return false;
 
 }
-
-function grid() {
+///Initializes grid
+function grid(/*maybe we could have a parameter SIZE?*/) {
 	
 	var square;
 	var row = '<div class="row" ng-controller="BuildCtrl" ></div>';
-	var gridContents = '<div class="row ng-scope" ng-controller="BuildCtrl"><div id="cell-1" class=" square '+world[1]+' cell-empty" ng-click="build(1)"></div><div id="cell-2" class=" square '+world[2]+' cell-empty" ng-click="build(2)"></div><div id="cell-3" class=" square '+world[3]+' cell-empty" ng-click="build(3)"></div><div id="cell-4" class=" square '+world[4]+' cell-empty" ng-click="build(4)"></div><div id="cell-5" class=" square '+world[5]+' cell-empty" ng-click="build(5)"></div><div id="cell-6" class=" square '+world[6]+' cell-empty" ng-click="build(6)"></div><div id="cell-7" class=" square '+world[7]+' cell-empty" ng-click="build(7)"></div><div id="cell-8" class=" square '+world[8]+' cell-empty" ng-click="build(8)"></div><div id="cell-9" class=" square '+world[9]+' cell-empty" ng-click="build(9)"></div><div id="cell-10" class=" square '+world[10]+' cell-empty" ng-click="build(10)"></div><div id="cell-11" class=" square '+world[11]+' cell-empty" ng-click="build(11)"></div><div id="cell-12" class=" square '+world[12]+' cell-empty" ng-click="build(12)"></div><div id="cell-13" class=" square '+world[13]+' cell-empty" ng-click="build(13)"></div><div id="cell-14" class=" square '+world[14]+' cell-empty" ng-click="build(14)"></div><div id="cell-15" class=" square '+world[15]+' cell-empty" ng-click="build(15)"></div><div id="cell-16" class=" square '+world[16]+' cell-empty" ng-click="build(16)"></div><div id="cell-17" class=" square '+world[17]+' cell-empty" ng-click="build(17)"></div><div id="cell-18" class=" square '+world[18]+' cell-empty" ng-click="build(18)"></div><div id="cell-19" class=" square '+world[19]+' cell-empty" ng-click="build(19)"></div><div id="cell-20" class=" square '+world[20]+' cell-empty" ng-click="build(20)"></div><div id="cell-21" class=" square '+world[21]+' cell-empty" ng-click="build(21)"></div><div id="cell-22" class=" square '+world[22]+' cell-empty" ng-click="build(22)"></div><div id="cell-23" class=" square '+world[23]+' cell-empty" ng-click="build(23)"></div><div id="cell-24" class=" square '+world[24]+' cell-empty" ng-click="build(24)"></div><div id="cell-25" class=" square '+world[25]+' cell-empty" ng-click="build(25)"></div><div id="cell-26" class=" square '+world[26]+' cell-empty" ng-click="build(26)"></div><div id="cell-27" class=" square '+world[27]+' cell-empty" ng-click="build(27)"></div><div id="cell-28" class=" square '+world[28]+' cell-empty" ng-click="build(28)"></div><div id="cell-29" class=" square '+world[29]+' cell-empty" ng-click="build(29)"></div></div>';
+
+	//Replaced the copy paste that was here.  Also, why are you starting at 1 instead of 0?
+	var gridContents = '<div class="row ng-scope" ng-controller="BuildCtrl">';
+	for (var i = 1; i < 30; i++){
+		gridContents += '<div id="cell-'+i+'" class=" square '+world[i]+' cell-empty" ng-click="build('+i+')"></div>';
+	}
+	gridContents += '</div>';
 	var rowContents='<div id=cell-'+cellCount+' class="square {{structure}}" ng-click="build()"></div>';
 	
 	for (var i = 0; i < 31; i++) {
@@ -169,7 +173,9 @@ function grid() {
 	return('<div class="grid">' + gridContents + '</div>');
 	
 }
-
+///What's this function do?
+///
+///
 function getOriginOffsets(origin,pick) {
 
 	var asociativeCells = new Array();

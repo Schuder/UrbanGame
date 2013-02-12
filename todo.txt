@@ -1,0 +1,11 @@
+TODO:
+ What's the object of the game?
+ Factories need textures
+ Need to add:
+ -Nice houses
+ -Church
+ -Graveyard
+ -I forget what else
+ Click&drag to multi-place
+ Better comments
+ localStorage/Cookie use
