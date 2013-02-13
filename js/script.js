@@ -1,4 +1,4 @@
-var allBuildings = 'cell-store cell-cottage cell-graveyard cell-church cell-factory cell-farm cell-erase cell-empty cell-road cell-bridge cell-bridgeCanal cell-canal';
+var allBuildings = 'cell-store cell-cottage cell-graveyard cell-church cell-factory cell-factory2 cell-factory3 cell-factory4 cell-farm cell-erase cell-empty cell-road cell-bridge cell-bridgeCanal cell-canal';
 var allTerrain = 'terrain-forest terrain-plains';
 var building = 'cell-erase';
 var world = new Array();	
@@ -175,6 +175,13 @@ function grid(/*maybe we could have a parameter SIZE?*/) {
 }
 ///What's this function do?
 ///
+///This function finds the id's of the surrounding cells based on the cell clicked(the origin) i.e
+///
+///		- - -
+///     - O -
+///		- - -
+///
+///After finding the id's it puts them into an array that can be returned in serveral different forms for ease of incrementing in for loops, see asociativeCells for a clear description of what it returns
 ///
 function getOriginOffsets(origin,pick) {
 
@@ -274,9 +281,9 @@ function buildFactory(origin) {
 	if (cellHasClass(cells.origin,'cell-empty','terrain-plains') && cellHasClass(cells.topRightDiagonal,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentTop,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentRight,'cell-empty','terrain-plains')) {
 
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
-		angular.element(document.getElementById(cells.topRightDiagonal)).removeClass(allBuildings).addClass(building);
-		angular.element(document.getElementById(cells.adjacentTop)).removeClass(allBuildings).addClass(building);
-		angular.element(document.getElementById(cells.adjacentRight)).removeClass(allBuildings).addClass(building);
+		angular.element(document.getElementById(cells.topRightDiagonal)).removeClass(allBuildings).addClass(building + '2');
+		angular.element(document.getElementById(cells.adjacentTop)).removeClass(allBuildings).addClass(building + '3');
+		angular.element(document.getElementById(cells.adjacentRight)).removeClass(allBuildings).addClass(building + '4');
 	
 		console.log('Built a factory!');
 	
@@ -314,9 +321,9 @@ function buildRoad(origin) {
 	
 	cells = getOriginOffsets(origin,0);
 
-	if (building == 'cell-road' && !(cellHasClass(cells.origin,'terrain-river'))) {
+	if (building == 'cell-road') {
 		
-		if (!(cellHasClass(cells.origin,'cell-canal')) && !(cellHasClass(cells.origin,'cell-farm')) && !(cellHasClass(cells.origin,'cell-cottage')) && !(cellHasClass(cells.origin,'cell-factory')) ) {
+		if (cellHasClass(cells.origin,'cell-empty') && !(cellHasClass(cells.origin,'terrain-river')) ) {
 		
 			angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		
@@ -324,13 +331,13 @@ function buildRoad(origin) {
 	
 	}
 	
-	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'terrain-river')) {
+	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'terrain-river') && cellHasClass(cells.origin,'cell-empty') ) {
 		
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 	
 	}
 	
-	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'cell-canal')) {
+	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'cell-canal') ) {
 	
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass('cell-bridgeCanal');		
 	
@@ -350,7 +357,7 @@ function destroy(origin) {
 	
 	cells = getOriginOffsets(origin,0);
 	
-	if(cellHasClass(cells.origin,'cell-factory')) {
+	if(cellHasClass(cells.origin,'cell-factory') || cellHasClass(cells.origin,'cell-factory2') || cellHasClass(cells.origin,'cell-factory3') || cellHasClass(cells.origin,'cell-factory4')) {
 	
 		destroyFactory(origin);
 		
@@ -362,30 +369,47 @@ function destroy(origin) {
 
 }
 
+///Implemented factory object idea so that factories dont get cut out by others when deleted (needs to be for loopified, just havent taken the time to do so)
+
 function destroyFactory(origin) {
 
 	var cells = new Array();
 	
 	cells = getOriginOffsets(origin,1);	
 	
-	for (var i = 0; i <3; i+=2) {
+	if (cellHasClass(cells[5],'cell-factory') && cellHasClass(cells[6],'cell-factory4') && cellHasClass(cells[8],'cell-factory3') && cellHasClass(cells[9],'cell-factory2') ) {
 	
-		if (cellHasClass(cells[5],'cell-factory') && cellHasClass(cells[7+i],'cell-factory') && cellHasClass(cells[8],'cell-factory') && cellHasClass(cells[4+i],'cell-factory')) {
+		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[6])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[8])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[9])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
+	
+	}
+	
+	else if (cellHasClass(cells[5],'cell-factory2') && cellHasClass(cells[4],'cell-factory3') && cellHasClass(cells[1],'cell-factory') && cellHasClass(cells[2],'cell-factory4') ) {
+	
+		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[4])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[1])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[2])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
+	
+	}
 
-			angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[7+i])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[8])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[4+i])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
+	else if (cellHasClass(cells[5],'cell-factory3') && cellHasClass(cells[6],'cell-factory2') && cellHasClass(cells[2],'cell-factory') && cellHasClass(cells[3],'cell-factory4') ) {
+	
+		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[6])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[2])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[3])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
+	
+	}
 
-		}	
-		else if (cellHasClass(cells[5],'cell-factory') && cellHasClass(cells[1+i],'cell-factory') && cellHasClass(cells[2],'cell-factory') && cellHasClass(cells[4+i],'cell-factory')) {
-
-			angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[1+i])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[2])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
-			angular.element(document.getElementById(cells[4+i])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
-
-		}		
+	else if (cellHasClass(cells[5],'cell-factory4') && cellHasClass(cells[4],'cell-factory') && cellHasClass(cells[7],'cell-factory3') && cellHasClass(cells[8],'cell-factory2') ) {
+	
+		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[4])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[7])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
+		angular.element(document.getElementById(cells[8])).removeClass(allBuildings).addClass(building).addClass('cell-empty');		
 	
 	}
 

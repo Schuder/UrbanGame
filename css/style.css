@@ -16,8 +16,8 @@ user-select: none;
 .square {
     width: 100px;
     height:100px;
-    border: 1px solid #5D5E1C;
     display: inline-block;
+	background: url('../terrain/terrain.png');	
 	
 }
 
@@ -28,7 +28,7 @@ user-select: none;
 }
 
 .terrain-forest {
-	background: url('../terrain/forest.png');
+	background-position: -300px 0px
 }
 
 .terrain-marsh {
@@ -36,62 +36,64 @@ user-select: none;
 }
 
 .terrain-plains {
-	background: url('../terrain/grass7.png');
+	background-position: 0px 0px;
 }
 
 .terrain-river {
-	background: url('../terrain/water.png');
-	border: 1px solid #4A625F;
-}
-
-
-.square-clicked {
-	background: white;
+	background-position: -100px 0px
 }
 
 .cell-road {
-	border: 1px solid #564A3A;
-	background: url('../terrain/road.jpg');
+	background-position: -200px 0px
 }
 
 .cell-bridge {
-	border: 1px solid #564A3A;
-	background: url('../terrain/bridge.png');
+	background-position: -600px 0px
 }
 
 .cell-bridgeCanal {
-	border: 1px solid #564A3A;
-	background: url('../terrain/bridgeCanal.png');
+	background-position: -700px 0px
 }
 
 .cell-canal {
-	border: 1px solid #564A3A;
-	background: url('../terrain/canal.png');
+	background-position: -800px 0px
 }
 
 .cell-cottage {
-	background: url('../terrain/cottageGrass.png');
+	background-position: -500px 0px
 }
 
 .cell-church {
-	background: url('../terrain/canal.png');
+	background: white;
 }
 
 .cell-graveyard {
-	background: url('../terrain/bridge.png');
+	background: black;
 }
 
 .cell-factory {
-	background: red;
+	background-position: -200px -100px
+}
+
+.cell-factory2 {
+	background-position: -100px -100px
+}
+
+.cell-factory3 {
+	background-position: 0px -100px
+}
+
+.cell-factory4 {
+	background-position: -300px -100px
 }
 
 .cell-farm {
-	background: url('../terrain/farm.png');
+	background-position: -400px 0px
 }
 
 
 .cell-erase {
-	background: url('../terrain/grass7.png');
+	background-position: 0px 0px
 }
 
 .cell-empty{
@@ -101,7 +103,7 @@ user-select: none;
 .row {
 
 	display: block;
-	height: 102px;
+	height: 100px;
 	width: 3200px
 }
 
@@ -111,6 +113,7 @@ user-select: none;
 	margin-bottom: 20px;
 	display: inline-block;
 	list-style-type: none;
+	position: fixed;
 	
 
 }
