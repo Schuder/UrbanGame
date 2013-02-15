@@ -247,29 +247,13 @@ function getOriginOffsets(origin,pick) {
 
 }
 
-function cellHasClass(cell,searchClass,searchClass2,searchClass3) {
-
-	if (searchClass2==undefined) {
-
-		if (angular.element(document.getElementById(cell)).hasClass(searchClass)) {
-			return true;
+function cellHasClass(cell/*,searchClasses...*/) {
+	for (var i = 1; i < arguments.length; i++){
+		if (!(document.getElementById(cell).hasClass(arguments[i]))){
+			return false;
 		}
 	}
-	else if (searchClass2 != undefined) {
-	
-		if (angular.element(document.getElementById(cell)).hasClass(searchClass) && angular.element(document.getElementById(cell)).hasClass(searchClass2) ) {
-			return true;
-		}	
-		
-	}
-	else if (searchClass3 != undefined) {
-	
-		if (angular.element(document.getElementById(cell)).hasClass(searchClass) && angular.element(document.getElementById(cell)).hasClass(searchClass2) && angular.element(document.getElementById(cell)).hasClass(searchClass23) ) {
-			return true;
-		}	
-		
-	}	
-	return false;
+	return true;
 }
 
 function buildFactory(origin) {
