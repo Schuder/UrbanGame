@@ -28,7 +28,7 @@ user-select: none;
 }
 
 .terrain-forest {
-	background-position: -300px 0px
+	background-position: -300px 0px;
 }
 
 .terrain-marsh {
@@ -40,27 +40,27 @@ user-select: none;
 }
 
 .terrain-river {
-	background-position: -100px 0px
+	background-position: -100px 0px;
 }
 
 .cell-road {
-	background-position: -200px 0px
+	background-position: -200px 0px;
 }
 
 .cell-bridge {
-	background-position: -600px 0px
+	background-position: -600px 0px;
 }
 
 .cell-bridgeCanal {
-	background-position: -700px 0px
+	background-position: -700px 0px;
 }
 
 .cell-canal {
-	background-position: -800px 0px
+	background-position: -800px 0px;
 }
 
 .cell-cottage {
-	background-position: -500px 0px
+	background-position: -500px 0px;
 }
 
 .cell-church {
@@ -68,32 +68,32 @@ user-select: none;
 }
 
 .cell-graveyard {
-	background: black;
+	background-position: -400px -100px;
 }
 
 .cell-factory {
-	background-position: -200px -100px
+	background-position: -200px -100px;
 }
 
 .cell-factory2 {
-	background-position: -100px -100px
+	background-position: -100px -100px;
 }
 
 .cell-factory3 {
-	background-position: 0px -100px
+	background-position: 0px -100px;
 }
 
 .cell-factory4 {
-	background-position: -300px -100px
+	background-position: -300px -100px;
 }
 
 .cell-farm {
-	background-position: -400px 0px
+	background-position: -400px 0px;
 }
 
 
 .cell-erase {
-	background-position: 0px 0px
+	background-position: 0px 0px;
 }
 
 .cell-empty{

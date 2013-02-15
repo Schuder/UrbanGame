@@ -454,7 +454,7 @@ function BuildCtrl($scope) {
 			destroy(origin);
 			
 		}
-		else {
+		else if (cellHasClass(cells.origin,['cell-empty','terrain-plains']) ) {
 
 			angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		
