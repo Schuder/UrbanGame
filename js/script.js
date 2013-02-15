@@ -249,7 +249,7 @@ function getOriginOffsets(origin,pick) {
 
 function cellHasClass(cell/*,searchClasses...*/) {
 	for (var i = 1; i < arguments.length; i++){
-		if (!(document.getElementById(cell).hasClass(arguments[i]))){
+		if (!(document.getElementById(cell)&&document.getElementById(cell).classList.contains(arguments[i]))){
 			return false;
 		}
 	}
@@ -439,7 +439,7 @@ function BuildCtrl($scope) {
 			destroy(origin);
 			
 		}
-		else if (cellHasClass(cells.origin,['cell-empty','terrain-plains']) ) {
+		else if (cellHasClass(cells.origin,'cell-empty','terrain-plains')){
 
 			angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		
