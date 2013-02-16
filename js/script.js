@@ -247,13 +247,28 @@ function getOriginOffsets(origin,pick) {
 
 }
 
-function cellHasClass(cell/*,searchClasses...*/) {
-	for (var i = 1; i < arguments.length; i++){
-		if (!(document.getElementById(cell)&&document.getElementById(cell).classList.contains(arguments[i]))){
-			return false;
+function cellHasClass(cell,classes){
+
+	var length = classes.length;
+	var booltemp = false;
+
+	for(var i=0;i<length;i++)
+	{
+		if(classes[i]!=undefined)
+		{
+			if(angular.element(document.getElementById(cell)).hasClass(classes[i]))
+			{
+				booltemp = true;
+			}
+			else
+			{
+				booltemp = false;
+				break;
+			}
 		}
 	}
-	return true;
+
+	return booltemp;
 }
 
 function buildFactory(origin) {
@@ -262,7 +277,7 @@ function buildFactory(origin) {
 	
 	cells = getOriginOffsets(origin,0);
 
-	if (cellHasClass(cells.origin,'cell-empty','terrain-plains') && cellHasClass(cells.topRightDiagonal,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentTop,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentRight,'cell-empty','terrain-plains')) {
+	if (cellHasClass(cells.origin,['cell-empty','terrain-plains']) && cellHasClass(cells.topRightDiagonal,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentTop,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentRight,['cell-empty','terrain-plains'])) {
 
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		angular.element(document.getElementById(cells.topRightDiagonal)).removeClass(allBuildings).addClass(building + '2');
@@ -281,7 +296,7 @@ function buildCottage(origin) {
 	
 	cells = getOriginOffsets(origin,0);
 	
-	if (cellHasClass(cells.origin,'cell-empty','terrain-plains') && cellHasClass(cells.bottomLeftDiagonal,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentBottom,'cell-empty','terrain-plains') && cellHasClass(cells.bottomRightDiagonal,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentLeft,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentRight,'cell-empty','terrain-plains') && cellHasClass(cells.topLeftDiagonal,'cell-empty','terrain-plains') && cellHasClass(cells.origin,'cell-empty','terrain-plains') && cellHasClass(cells.adjacentTop,'cell-empty','terrain-plains') && cellHasClass(cells.topRightDiagonal,'cell-empty','terrain-plains')) {
+	if (cellHasClass(cells.origin,['cell-empty','terrain-plains']) && cellHasClass(cells.bottomLeftDiagonal,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentBottom,['cell-empty','terrain-plains']) && cellHasClass(cells.bottomRightDiagonal,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentLeft,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentRight,['cell-empty','terrain-plains']) && cellHasClass(cells.topLeftDiagonal,['cell-empty','terrain-plains']) && cellHasClass(cells.origin,['cell-empty','terrain-plains']) && cellHasClass(cells.adjacentTop,['cell-empty','terrain-plains']) && cellHasClass(cells.topRightDiagonal,['cell-empty','terrain-plains'])) {
 	
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		angular.element(document.getElementById(cells.bottomLeftDiagonal)).removeClass(allBuildings).addClass('cell-farm');
@@ -307,7 +322,7 @@ function buildRoad(origin) {
 
 	if (building == 'cell-road') {
 		
-		if (cellHasClass(cells.origin,'cell-empty') && !(cellHasClass(cells.origin,'terrain-river')) ) {
+		if (cellHasClass(cells.origin,['cell-empty']) && !(cellHasClass(cells.origin,['terrain-river'])) ) {
 		
 			angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		
@@ -315,19 +330,19 @@ function buildRoad(origin) {
 	
 	}
 	
-	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'terrain-river') && cellHasClass(cells.origin,'cell-empty') ) {
+	else if (building == 'cell-bridge' && cellHasClass(cells.origin,['terrain-river', 'cell-empty']) ) {
 		
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 	
 	}
 	
-	else if (building == 'cell-bridge' && cellHasClass(cells.origin,'cell-canal') ) {
+	else if (building == 'cell-bridge' && cellHasClass(cells.origin,['cell-canal']) ) {
 	
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass('cell-bridgeCanal');		
 	
 	}
 
-	else if (building == 'cell-canal' && cellHasClass(cells.origin,'terrain-river') || cellHasClass(cells.adjacentTop,'cell-canal')|| cellHasClass(cells.adjacentBottom,'cell-canal')) {
+	else if (building == 'cell-canal' && cellHasClass(cells.origin,['terrain-river']) || cellHasClass(cells.adjacentTop,['cell-canal'])|| cellHasClass(cells.adjacentBottom,['cell-canal'])) {
 		
 		angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 	
@@ -341,7 +356,7 @@ function destroy(origin) {
 	
 	cells = getOriginOffsets(origin,0);
 	
-	if(cellHasClass(cells.origin,'cell-factory') || cellHasClass(cells.origin,'cell-factory2') || cellHasClass(cells.origin,'cell-factory3') || cellHasClass(cells.origin,'cell-factory4')) {
+	if(cellHasClass(cells.origin,['cell-factory']) || cellHasClass(cells.origin,['cell-factory2']) || cellHasClass(cells.origin,['cell-factory3']) || cellHasClass(cells.origin,['cell-factory4'])) {
 	
 		destroyFactory(origin);
 		
@@ -361,7 +376,7 @@ function destroyFactory(origin) {
 	
 	cells = getOriginOffsets(origin,1);	
 	
-	if (cellHasClass(cells[5],'cell-factory') && cellHasClass(cells[6],'cell-factory4') && cellHasClass(cells[8],'cell-factory3') && cellHasClass(cells[9],'cell-factory2') ) {
+	if (cellHasClass(cells[5],['cell-factory']) && cellHasClass(cells[6],['cell-factory4']) && cellHasClass(cells[8],['cell-factory3']) && cellHasClass(cells[9],['cell-factory2']) ) {
 	
 		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
 		angular.element(document.getElementById(cells[6])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
@@ -370,7 +385,7 @@ function destroyFactory(origin) {
 	
 	}
 	
-	else if (cellHasClass(cells[5],'cell-factory2') && cellHasClass(cells[4],'cell-factory3') && cellHasClass(cells[1],'cell-factory') && cellHasClass(cells[2],'cell-factory4') ) {
+	else if (cellHasClass(cells[5],['cell-factory2']) && cellHasClass(cells[4],['cell-factory3']) && cellHasClass(cells[1],['cell-factory']) && cellHasClass(cells[2],['cell-factory4']) ) {
 	
 		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
 		angular.element(document.getElementById(cells[4])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
@@ -379,7 +394,7 @@ function destroyFactory(origin) {
 	
 	}
 
-	else if (cellHasClass(cells[5],'cell-factory3') && cellHasClass(cells[6],'cell-factory2') && cellHasClass(cells[2],'cell-factory') && cellHasClass(cells[3],'cell-factory4') ) {
+	else if (cellHasClass(cells[5],['cell-factory3']) && cellHasClass(cells[6],['cell-factory2']) && cellHasClass(cells[2],['cell-factory']) && cellHasClass(cells[3],['cell-factory4']) ) {
 	
 		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
 		angular.element(document.getElementById(cells[6])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
@@ -388,7 +403,7 @@ function destroyFactory(origin) {
 	
 	}
 
-	else if (cellHasClass(cells[5],'cell-factory4') && cellHasClass(cells[4],'cell-factory') && cellHasClass(cells[7],'cell-factory3') && cellHasClass(cells[8],'cell-factory2') ) {
+	else if (cellHasClass(cells[5],['cell-factory4']) && cellHasClass(cells[4],['cell-factory']) && cellHasClass(cells[7],['cell-factory3']) && cellHasClass(cells[8],['cell-factory2']) ) {
 	
 		angular.element(document.getElementById(cells[5])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
 		angular.element(document.getElementById(cells[4])).removeClass(allBuildings).addClass(building).addClass('cell-empty');
@@ -439,7 +454,7 @@ function BuildCtrl($scope) {
 			destroy(origin);
 			
 		}
-		else if (cellHasClass(cells.origin,'cell-empty','terrain-plains')){
+		else if (cellHasClass(cells.origin,['cell-empty','terrain-plains']) ) {
 
 			angular.element(document.getElementById(cells.origin)).removeClass(allBuildings).addClass(building);
 		
